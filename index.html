@@ -1,122 +1,206 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>AI Sites Builder</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <style>
+  <meta charset="UTF-8" />
+  <title>Douae Sites — AI Website Builder</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />  <style>
     body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #020617, #0f172a);
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-      color: white;
+      padding: 0;
       text-align: center;
+      color: #e5e7eb;
     }
 
     header {
-      padding: 40px 20px;
+      background: linear-gradient(90deg, #020617, #1e293b);
+      color: #e5e7eb;
+      padding: 30px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.6);
     }
 
-    h1 {
-      font-size: 3em;
-      margin-bottom: 10px;
-    }
-
-    p {
-      font-size: 1.2em;
-      max-width: 600px;
+    main {
+      max-width: 800px;
       margin: auto;
-      line-height: 1.6;
-    }
-
-    .buttons {
+      background: #020617;
+      padding: 30px;
       margin-top: 30px;
+      border-radius: 18px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.7);
+      animation: fadeIn 1s ease;
     }
 
-    .btn {
-      display: inline-block;
-      padding: 15px 30px;
-      margin: 10px;
-      border-radius: 25px;
-      background: #00ffd5;
-      color: #000;
-      text-decoration: none;
-      font-weight: bold;
-      transition: 0.3s;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .btn:hover {
-      background: #00c0a0;
-      transform: scale(1.05);
+    textarea, select, button {
+      width: 100%;
+      padding: 14px;
+      margin-top: 14px;
+      font-size: 16px;
+      border-radius: 12px;
+      border: none;
     }
 
-    section {
-      padding: 60px 20px;
-      background: rgba(0, 0, 0, 0.4);
+    textarea {
+      height: 120px;
+      background: #020617;
+      color: #e5e7eb;
+      box-shadow: inset 0 0 0 1px #334155;
     }
 
-    .cards {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
+    select {
+      background: #020617;
+      color: #e5e7eb;
+      box-shadow: inset 0 0 0 1px #334155;
+    }
+
+    button {
+      background: linear-gradient(90deg, #2563eb, #1e40af);
+      color: white;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    button:hover {
+      transform: scale(1.03);
+      box-shadow: 0 8px 20px rgba(37,99,235,0.6);
+    }
+
+    .preview {
       margin-top: 30px;
-    }
-
-    .card {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 20px;
+      border: 2px dashed #334155;
+      padding: 25px;
+      position: relative;
       border-radius: 15px;
-      width: 250px;
+      background: #020617;
+    }
+
+    .watermark {
+      position: absolute;
+      bottom: 12px;
+      right: 18px;
+      opacity: 0.5;
+      font-size: 13px;
+      color: #94a3b8;
+    }
+
+    .locked {
+      background: #020617;
+      color: #f87171;
+      padding: 25px;
+      border-radius: 18px;
+      margin-top: 25px;
+      box-shadow: inset 0 0 0 2px #7f1d1d;
     }
 
     footer {
-      padding: 20px;
-      font-size: 0.9em;
-      opacity: 0.7;
+      margin-top: 50px;
+      font-size: 12px;
+      color: #94a3b8;
+      padding-bottom: 25px;
     }
-  </style>
-</head>
-<body>
 
-  <header>
-    <h1>AI Sites Builder</h1>
-    <p>
-      Build professional websites in minutes using artificial intelligence.
-      Describe your idea, choose a template, and let AI create your site instantly.
-    </p>
+    .download {
+      background: linear-gradient(90deg, #059669, #047857);
+      margin-top: 15px;
+    }
 
-    <div class="buttons">
-      <a href="#" class="btn">Get Started</a>
-      <a href="#" class="btn">View Templates</a>
-    </div>
-  </header>
+    .pay {
+      background: linear-gradient(90deg, #7c3aed, #5b21b6);
+      margin-top: 15px;
+    }
 
-  <section>
-    <h2>Why Choose AI Sites Builder?</h2>
+  </style></head>
+<body><header>
+  <h1>Douae Sites</h1>
+  <p>Build your website in seconds — Free 30-day trial</p>
+</header><main id="app">
+  <h2>Describe your website</h2>
+  <textarea id="description" placeholder="Describe the website you want..."></textarea>  <h3>Select a template</h3>
+  <select id="template">
+    <option value="modern">Modern</option>
+    <option value="business">Business</option>
+    <option value="portfolio">Personal</option>
+  </select><button onclick="generateSite()">Generate Website</button>
 
-    <div class="cards">
-      <div class="card">
-        <h3>⚡ Fast</h3>
-        <p>Create a full website in less than 5 minutes.</p>
+  <div class="preview" id="preview">
+    <p>Your generated website will appear here</p>
+  </div><button class="download" onclick="downloadSite()">Download Website</button> <button class="pay" onclick="goToPayment()">Remove Watermark — $5</button>
+
+</main><footer>
+  <p>By using this service, you agree to the Terms of Service and Privacy Policy.</p>
+</footer><script>
+  // ====== Trial System (30 days per device) ======
+  const TRIAL_DAYS = 30;
+  const trialKey = "trialStartDate";
+
+  function isTrialExpired() {
+    const start = localStorage.getItem(trialKey);
+    if (!start) {
+      localStorage.setItem(trialKey, Date.now());
+      return false;
+    }
+    const daysPassed = (Date.now() - parseInt(start)) / (1000 * 60 * 60 * 24);
+    return daysPassed > TRIAL_DAYS;
+  }
+
+  function lockApp() {
+    const app = document.getElementById("app");
+    app.innerHTML = `
+      <div class="locked">
+        <h2>Trial Expired</h2>
+        <p>Please select a plan to continue using Douae Sites.</p>
+        <div>
+          <h3>Starter</h3>
+          <p>Free trial — 1 month with watermark</p>
+          <h3>Pro</h3>
+          <p>$50 per website (one-time) — without watermark</p>
+          <h3>Unlimited</h3>
+          <p>$89 per month — unlimited websites</p>
+        </div>
+        <button class="pay" onclick="goToPayment()">Subscribe Now</button>
       </div>
+    `;
+  }
 
-      <div class="card">
-        <h3>🎨 Beautiful</h3>
-        <p>Modern templates designed for every business and idea.</p>
-      </div>
+  if (isTrialExpired()) {
+    lockApp();
+  }
 
-      <div class="card">
-        <h3>🤖 Smart AI</h3>
-        <p>AI understands your description and builds the layout for you.</p>
-      </div>
-    </div>
-  </section>
+  // ====== Content Filter (Halal Filter) ======
+  const forbiddenWords = ["alcohol","drugs","porn","gambling","casino","interest","dating site","adult","sex","beer","wine","vodka","xxx"];
 
-  <footer>
-    <p>© 2026 AI Sites Builder — Created by Douae</p>
-  </footer>
+  function generateSite() {
+    if (isTrialExpired()) { lockApp(); return; }
+    const desc = document.getElementById("description").value.toLowerCase();
+    for (let word of forbiddenWords) { if (desc.includes(word)) { alert("This description violates our Terms of Service."); return; } }
 
-</body>
+    const template = document.getElementById("template").value;
+    const preview = document.getElementById("preview");
+    let design = "";
+    if (template === "modern") { design = "<h2 style='color:#60a5fa'>Modern Website</h2>"; }
+    else if (template === "business") { design = "<h2 style='color:#34d399'>Business Website</h2>"; }
+    else { design = "<h2 style='color:#a78bfa'>Personal Website</h2>"; }
+
+    preview.innerHTML = `${design}<p>${desc}</p><div class="watermark">Generated by Douae Sites</div>`;
+  }
+
+  function downloadSite() {
+    const content = document.getElementById("preview").innerHTML;
+    if (!content || content.includes("will appear")) { alert("Please generate a website first."); return; }
+    const htmlFile = `<!DOCTYPE html><html lang=\"en\"><head><meta charset=\"UTF-8\"><title>My Website</title></head><body>${content}</body></html>`;
+    const blob = new Blob([htmlFile], { type: "text/html" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "my-website.html";
+    link.click();
+  }
+
+  function goToPayment() {
+    window.open("https://gumroad.com", "_blank");
+  }
+</script></body>
 </html>
