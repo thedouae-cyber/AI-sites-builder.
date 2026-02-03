@@ -1,1 +1,0 @@
-AI Sites Builder lets anyone create a clean website in minutes using AI. Describe your idea, preview your site instantly, and download a ready-to-use page. Enjoy a short free  trial to explore the features. No payment system or upgrade exists yet, only simple AI website generation for everyone.
