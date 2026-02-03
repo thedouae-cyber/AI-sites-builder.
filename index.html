@@ -291,6 +291,35 @@ function downloadSite() {
 
 initTrial();
 </script>
+<script>
+const START_KEY = "start_date";
+const SITES_KEY = "sites_created";
+const TRIAL_DAYS = 30;
 
+if (!localStorage.getItem(START_KEY)) {
+  localStorage.setItem(START_KEY, Date.now());
+  localStorage.setItem(SITES_KEY, "0");
+}
+
+function createSite() {
+  let sites = parseInt(localStorage.getItem(SITES_KEY));
+  let start = parseInt(localStorage.getItem(START_KEY));
+  let days = (Date.now() - start) / (1000 * 60 * 60 * 24);
+
+  if (days <= TRIAL_DAYS) {
+    sites++;
+    localStorage.setItem(SITES_KEY, sites);
+    alert("✅ Free trial: Site created!");
+  } else {
+    if (sites < 1) {
+      sites++;
+      localStorage.setItem(SITES_KEY, sites);
+      alert("🆓 One free site created. Upgrade to create more.");
+    } else {
+      alert("💳 Trial ended. Please upgrade to create more sites.");
+    }
+  }
+}
+</script>
 </body>
 </html>
